@@ -5,7 +5,7 @@ fn test_quantum_exchange() {
     let mut server = QuantumServerExchange::new();
 
     // Get public keys
-    let client_public = client.public_key().to_vec();
+    let _client_public = client.public_key().to_vec();
     let server_public = server.public_key().to_vec();
 
     // Client completes their part

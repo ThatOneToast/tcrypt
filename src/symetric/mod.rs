@@ -24,6 +24,7 @@ use crate::{EncryptionError, Encryptor};
 /// let decrypted = encryption.decrypt(&encrypted).unwrap();
 /// assert_eq!(&decrypted, data);
 /// ```
+#[derive(Clone)]
 pub struct AESEncryption {
     cipher: Aes256Gcm,
     nonce: Nonce<U12>,

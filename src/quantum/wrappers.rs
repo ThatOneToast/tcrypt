@@ -1,14 +1,19 @@
 use super::{KyberKEM, QuantumError};
 
+/// Errors that can occur during key exchange operations
 #[derive(Debug, thiserror::Error)]
 pub enum ExchangeError {
+    /// Error from quantum exchange operations
     #[error("Quantum exchange error: {0}")]
     QuantumError(#[from] QuantumError),
+
+    /// Error from classical exchange operations
     #[error("Classical exchange error: {0}")]
     ClassicalError(#[from] crate::key_management::KeyExchangeError),
 }
 
 /// Client-side wrapper for quantum-resistant key exchange
+#[derive(Clone)]
 pub struct QuantumClientExchange {
     kem: KyberKEM,
     shared_secret: Option<Vec<u8>>,
@@ -27,6 +32,7 @@ impl QuantumClientExchange {
         }
     }
 
+    /// Returns the public key for this exchange instance
     pub fn public_key(&self) -> &[u8] {
         &self.public_key
     }
@@ -53,6 +59,7 @@ impl QuantumClientExchange {
 }
 
 /// Server-side wrapper for quantum-resistant key exchange
+#[derive(Clone)]
 pub struct QuantumServerExchange {
     kem: KyberKEM,
     shared_secret: Option<Vec<u8>>,
@@ -71,6 +78,7 @@ impl QuantumServerExchange {
         }
     }
 
+    /// Returns the public key for this exchange instance
     pub fn public_key(&self) -> &[u8] {
         &self.public_key
     }
@@ -92,12 +100,11 @@ impl QuantumServerExchange {
 }
 
 /// Hybrid exchange wrapper combining classical and quantum key exchange
+#[derive(Clone)]
 pub struct HybridKeyExchange {
     quantum: KyberKEM,
     classical: crate::key_management::KeyExchange,
     shared_secret: Option<Vec<u8>>,
-    quantum_public: Vec<u8>,
-    classical_public: x25519_dalek::PublicKey,
 }
 
 impl HybridKeyExchange {
@@ -105,15 +112,11 @@ impl HybridKeyExchange {
     pub fn new() -> Self {
         let quantum = KyberKEM::new();
         let classical = crate::key_management::KeyExchange::new();
-        let quantum_public = quantum.public_key().to_vec();
-        let classical_public = *classical.public_key();
 
         Self {
             quantum,
             classical,
             shared_secret: None,
-            quantum_public,
-            classical_public,
         }
     }
 

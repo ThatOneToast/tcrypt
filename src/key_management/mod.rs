@@ -35,6 +35,7 @@ pub enum KeyExchangeError {
 /// let mut exchange = KeyExchange::new();
 /// let public_key = exchange.public_key();
 /// ```
+#[derive(Clone)]
 pub struct KeyExchange {
     private_key: StaticSecret,
     public_key: PublicKey,

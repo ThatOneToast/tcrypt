@@ -5,25 +5,37 @@
 //! including CRYSTALS-Kyber for key encapsulation.
 
 use pqcrypto_kyber::*;
-use pqcrypto_traits::kem::{Ciphertext, PublicKey as _, SecretKey as _, SharedSecret as _};
+use pqcrypto_traits::kem::{Ciphertext, PublicKey as _, SharedSecret as _};
 
+/// Quantum implementation wrappers
 pub mod wrappers;
 
+/// Errors that can occur during quantum cryptographic operations
 #[derive(Debug, thiserror::Error)]
 pub enum QuantumError {
+    /// Error during key generation
     #[error("Key generation failed")]
     KeyGenError,
-    #[error("Invalid public key format")]
+    
+    /// Invalid or corrupted public key format
+    #[error("Invalid public key format")] 
     InvalidPublicKey,
+    
+    /// Invalid or corrupted ciphertext format
     #[error("Invalid ciphertext format")]
     InvalidCiphertext,
+    
+    /// Error during key encapsulation
     #[error("Encapsulation failed")]
     EncapsulationError,
+    
+    /// Error during key decapsulation 
     #[error("Decapsulation failed")]
     DecapsulationError,
 }
 
 /// CRYSTALS-Kyber key encapsulation mechanism (KEM)
+#[derive(Clone)]
 pub struct KyberKEM {
     public_key: kyber768::PublicKey,
     secret_key: kyber768::SecretKey,
@@ -75,6 +87,7 @@ impl Default for KyberKEM {
 }
 
 /// Hybrid encryption combining classical and quantum-resistant algorithms
+#[derive(Clone)]
 pub struct HybridEncryption {
     classical: super::symetric::AESEncryption,
     quantum: KyberKEM,

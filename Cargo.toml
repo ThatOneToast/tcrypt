@@ -11,7 +11,7 @@ keywords = ["cryptography", "encryption", "security", "x25519", "aes-gcm"]
 categories = ["cryptography", "security"]
 
 [features]
-default = []
+default = ["quantum"]
 quantum = ["dep:pqcrypto-kyber", "dep:pqcrypto-traits"]
 
 [lib]

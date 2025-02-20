@@ -10,6 +10,7 @@ use x25519_dalek::{PublicKey, StaticSecret};
 pub mod protocol;
 
 /// Implements Diffie-Hellman key exchange using X25519
+#[derive(Clone)]
 pub struct DHKeyExchange {
     private_key: StaticSecret,
     public_key: PublicKey,

@@ -1,6 +1,7 @@
 use crate::{symetric::AESEncryption, Encryptor};
 
 /// Provides encrypted communication channel using shared secret
+#[derive(Clone)]
 pub struct SecureChannel {
     encryption: AESEncryption,
 }

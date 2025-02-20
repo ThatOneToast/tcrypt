@@ -3,6 +3,7 @@ use x25519_dalek::PublicKey;
 use super::{KeyExchange, KeyExchangeError};
 
 /// Client-side implementation of key exchange
+#[derive(Clone)]
 pub struct ClientKeyExchange {
     exchange: KeyExchange,
 }
