@@ -1,18 +1,19 @@
 [package]
 name = "tcrypt"
 version = "0.1.2"
-edition = "2021"
+edition = "2024"
 description = "A secure cryptographic library for key exchange and encryption"
 license = "MIT"
-repository = "https://github.com/yourusername/tcrypt"
+repository = "https://github.com/ThatOneToast/tcrypt"
 documentation = "https://docs.rs/tcrypt"
 readme = "README.md"
-keywords = ["cryptography", "encryption", "security", "x25519", "aes-gcm"]
+keywords = ["cryptography", "encryption", "security"]
 categories = ["cryptography", "security"]
 
 [features]
 default = ["quantum"]
 quantum = ["dep:pqcrypto-kyber", "dep:pqcrypto-traits"]
+
 
 [lib]
 name = "tcrypt"
@@ -22,8 +23,8 @@ doctest = false
 [dependencies]
 aes-gcm = "0.10.3"
 argon2 = "0.5.3"
-pqcrypto-kyber = {version = "0.8.1", optional = true}
-pqcrypto-traits ={ version = "0.3.5", optional = true}
+pqcrypto-kyber = { version = "0.8.1", optional = true }
+pqcrypto-traits = { version = "0.3.5", optional = true }
 sha2 = "0.10.8"
 thiserror = "2.0.11"
 x25519-dalek = { version = "2.0.1", features = ["static_secrets"] }
