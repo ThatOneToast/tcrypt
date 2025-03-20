@@ -6,6 +6,7 @@ use crate::{
 };
 
 pub mod key_exchange;
+pub mod password;
 
 #[test]
 fn test_basic_encryption_decryption() {

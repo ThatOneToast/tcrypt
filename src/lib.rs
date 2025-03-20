@@ -96,6 +96,7 @@
 
 pub mod key_exchange;
 pub mod key_management;
+pub mod password;
 pub mod prelude;
 #[cfg(feature = "quantum")]
 pub mod quantum;
