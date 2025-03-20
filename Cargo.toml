@@ -7,8 +7,8 @@ license = "MIT"
 repository = "https://github.com/ThatOneToast/tcrypt"
 documentation = "https://docs.rs/tcrypt"
 readme = "README.md"
-keywords = ["cryptography", "encryption", "security"]
-categories = ["cryptography", "security"]
+keywords = ["cryptography", "encryption"]
+categories = ["cryptography"]
 
 [features]
 default = ["quantum"]
